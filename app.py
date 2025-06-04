@@ -154,9 +154,6 @@ ranking_df = pd.DataFrame({
 # Urutkan berdasarkan perubahan terbesar
 ranking_df = ranking_df.sort_values("Perubahan (%)", ascending=False).reset_index(drop=True)
 
-# Urutkan berdasarkan perubahan terbesar
-ranking_df = ranking_df.sort_values("Perubahan (%)", ascending=False).reset_index(drop=True)
-
 # Tambahkan header kolom
 col1, col2, col3, col4, col5 = st.columns([1, 1.5, 3, 2.5, 3])
 with col1:
@@ -186,22 +183,6 @@ for idx, row in ranking_df.iterrows():
     with col5:
         st.markdown(f"{selected_symbol}{row['Harga Sekarang']:,.2f}")
 
-
-# Tampilkan sebagai ranking baris per baris
-for idx, row in ranking_df.iterrows():
-    col1, col2, col3, col4, col5 = st.columns([1, 1.5, 3, 2.5, 3])
-    with col1:
-        st.markdown(f"*#{idx+1}*")
-    with col2:
-        if row["Logo"].startswith("http"):
-            st.image(row["Logo"], width=32)
-    with col3:
-        st.markdown(f"**{row['Nama']} ({row['Ticker'].replace('-USD','')})**")
-    with col4:
-        warna = "#00FF88" if row["Perubahan (%)"] >= 0 else "#FF4444"
-        st.markdown(f"<span style='color:{warna}'>{row['Perubahan (%)']:.2f}%</span>", unsafe_allow_html=True)
-    with col5:
-        st.markdown(f"{selected_symbol}{row['Harga Sekarang']:,.2f}")
 
 # Info tambahan
 st.markdown("---")
